@@ -14,7 +14,7 @@ namespace Plans.DomainModel.Plans
 
         public bool StartOverEveryWeak { get; set; }
         
-        public bool Includeolidays { get; set; }
+        public bool IncludeHolidays { get; set; }
 
         public int? DaysGap { get; set; }
         
