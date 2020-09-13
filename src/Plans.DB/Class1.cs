@@ -1,9 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
+using Plans.DB.DBManagers;
+using Plans.DomainModel.Users;
 
 namespace Plans.DB
 {
     public class Class1
     {
+        public void connect() 
+        {
+            var connetionString = "server=localhost;database=plans;uid=root;pwd=;";
+            var cnn = new MySqlConnection(connetionString);
+
+            var context = new DBContext();
+            var userFactory = new UserFactory();
+
+            var userManager = new UserDBManager(context, userFactory);
+
+            var user = new User 
+            {
+                Id = 3,
+                Login = "Andrey1",
+                Name = "Andrey",
+                LastName = "Nasevich"
+            };
+
+            
+            var u = userManager.CreateUser(user, "123");
+
+            /*try
+            {
+                cnn.Open();
+
+                string querry = "select login from `user`";
+                mysqlcommand cmd = new mysqlcommand(querry, cnn);
+                mysqldatareader rdr = cmd.executereader();
+
+                var logins = new List<object>();
+                while (rdr.Read())
+                {
+                    logins.Add(rdr[0]);
+                    Console.WriteLine(rdr[0]);
+                }
+                rdr.Close();
+
+                cnn.Close();
+            }
+            catch
+            {
+
+            }*/
+
+        }
         /*
       CREATE TABLE `plans`.`user` (
       `id` INT NOT NULL AUTO_INCREMENT,
