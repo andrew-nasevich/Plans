@@ -17,8 +17,6 @@ namespace Plans.DomainModel.Plans
 
         public float Percentage { get; set; }
 
-        public DateTime CreatingTime { get; set; }
-
-        public DateTime FinishingTime { get; set; }
+        public DateTime CreatingDateTime { get; set; }
     }
 } 

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using Plans.DomainModel.Users;
+
 
 namespace Plans.DomainModel.Interfaces
 {
@@ -12,12 +11,11 @@ namespace Plans.DomainModel.Interfaces
 
         public string Name { get; set; }
 
-        public IReadOnlyCollection<IDaysInterval> DaysIntervals { get; set; }
+        public IPlanPeriod PlanPeriod { get; set; }
 
         public float Percentage { get; set; }
 
-        public DateTime CreatingTime { get; set; }
+        public DateTime CreatingDateTime { get; set; }
 
-        public DateTime FinishingTime { get; set; }
     }
 }
