@@ -1,4 +1,6 @@
-﻿namespace Plans.DomainModel.Interfaces
+﻿using Plans.DomainModel.Interfaces;
+
+namespace Plans.Foundation.Interfaces
 {
     public interface IUserFactory
     {

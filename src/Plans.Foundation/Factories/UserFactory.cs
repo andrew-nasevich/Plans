@@ -1,6 +1,8 @@
 ﻿using Plans.DomainModel.Interfaces;
+using Plans.DomainModel.Users;
+using Plans.Foundation.Interfaces;
 
-namespace Plans.DomainModel.Users
+namespace Plans.Foundation.Factories
 {
     public class UserFactory
         : IUserFactory
