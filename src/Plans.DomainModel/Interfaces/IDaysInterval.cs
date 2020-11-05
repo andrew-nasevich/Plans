@@ -1,10 +1,8 @@
-﻿using Plans.DomainModel.Interfaces;
-using System;
+﻿using System;
 
-namespace Plans.DomainModel.Plans
+namespace Plans.DomainModel.Interfaces
 {
-    public class DaysInterval
-        : IDaysInterval
+    public interface IDaysInterval
     {
         public int Id { get; set; }
 
@@ -15,11 +13,11 @@ namespace Plans.DomainModel.Plans
         public bool IsRepeated { get; set; }
 
         public bool StartOverEveryWeak { get; set; }
-        
+
         public bool IncludeHolidays { get; set; }
 
         public int? DaysGap { get; set; }
-        
+
         public DateTime? FinishDayOfRepetition { get; set; }
 
     }

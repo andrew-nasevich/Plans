@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Plans.DomainModel.Interfaces;
+using Plans.DomainModel.Users;
 
-namespace Plans.DomainModel.Plans
+namespace Plans.DomainModel.Interfaces
 {
-    public class Plan
-        : IPlan
+    public interface IPlan
     {
         public int Id { get; set; }
 
@@ -21,4 +20,4 @@ namespace Plans.DomainModel.Plans
 
         public DateTime FinishingTime { get; set; }
     }
-} 
+}

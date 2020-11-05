@@ -1,6 +1,8 @@
-﻿namespace Plans.DomainModel.Users
+﻿using Plans.DomainModel.Interfaces;
+
+namespace Plans.DomainModel.Users
 {
-    public class User
+    public class User : IUser
     {
         public int Id { get; set; }
 

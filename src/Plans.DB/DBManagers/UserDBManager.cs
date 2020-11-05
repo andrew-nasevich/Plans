@@ -29,18 +29,18 @@ namespace Plans.DB.DBManagers
 
                 string querry = 
                     $"INSERT INTO `user` (`login`, `pass_hash`, `name`, `last_name`) VALUES('{user.Login}', '{passwordHash}', '{user.Name}', '{user.LastName}');\n" +
-                    "SELECT LAST_INSERTED_ID()";
+                    "SELECT LAST_INSERT_ID()";
                 MySqlCommand cmd = new MySqlCommand(querry, cnn);
 
                 var rdr = cmd.ExecuteReader();
 
                 rdr.Read();
-                user.Id = (Int32)rdr[0];
+                user.Id = Convert.ToInt32(rdr[0]);
                 rdr.Close();
 
                 cnn.Close();
             }
-            catch(Exception e)
+            catch
             {
                 return null;
             }
