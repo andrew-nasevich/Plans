@@ -8,10 +8,6 @@
     <Folder Include="Новая папка\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Plans.DB\Plans.DB.csproj" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

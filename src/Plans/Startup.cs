@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Plans.DB;
-using Plans.DB.Converters;
-using Plans.DB.DBManagers;
 using Plans.DomainModel.Interfaces;
 using Plans.DomainModel.Plans;
 using Plans.DomainModel.Users;
@@ -20,6 +17,7 @@ namespace Plans
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,46 +27,23 @@ namespace Plans
             {
                 app.UseDeveloperExceptionPage();
             }
+            else 
+            {
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    var context1 = new DBContext();
-                    var converter = new DatetimeConverter();
-                    var manager = new PlanDBManager(context1, converter);
-                    var user = new User() { Id = 3 };
-                    var daysInterval = new DaysInterval
-                    {
-                        DaysGap = 1,
-                        FinishDay = DateTime.Now,
-                        IncludeHolidays = true,
-                        IsRepeated = true,
-                        StartDay = DateTime.Now,
-                        StartOverEveryWeak = true,
-                        FinishDayOfRepetition = DateTime.Now
-                    };
-                    var plan = new Plan
-                    {
-                        CreatingTime = DateTime.Now,
-                        FinishingTime = DateTime.Now,
-                        Name = "abc",
-                        Percentage = 10,
-                        User = user,
-                        DaysIntervals = new List<DaysInterval> { daysInterval }
-                    };
-
-                    manager.CreatePlan(plan, 3);
-
-                    var result = converter.ConvertToDateTime("2000-07-17 23:14:10");
-                    var daytime = converter.ConvertToString(result);
-
-                    var a = new Class1();
-                    a.connect();
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

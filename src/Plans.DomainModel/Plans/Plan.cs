@@ -13,7 +13,7 @@ namespace Plans.DomainModel.Plans
 
         public string Name { get; set; }
 
-        public IReadOnlyCollection<IDaysInterval> DaysIntervals { get; set; }
+        public IPlanPeriod PlanPeriod { get; set; }
 
         public float Percentage { get; set; }
 
