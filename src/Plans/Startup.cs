@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Plans.DomainModel.Interfaces;
 using Plans.DomainModel.Plans;
 using Plans.DomainModel.Users;
+using Plans.Repositories.DbContexts;
 using System;
 using System.Collections.Generic;
 
@@ -18,6 +18,7 @@ namespace Plans
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<PlansDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

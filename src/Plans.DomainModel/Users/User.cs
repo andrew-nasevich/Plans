@@ -1,8 +1,9 @@
-﻿using Plans.DomainModel.Interfaces;
+﻿using Plans.DomainModel.Plans;
+using System.Collections.Generic;
 
 namespace Plans.DomainModel.Users
 {
-    public class User : IUser
+    public class User
     {
         public int Id { get; set; }
 
@@ -13,5 +14,7 @@ namespace Plans.DomainModel.Users
         public string LastName { get; set; }
 
         public string PasswordHash { get; set; }
+
+        public ICollection<Plan> Plans { get; set; }
     }
 }

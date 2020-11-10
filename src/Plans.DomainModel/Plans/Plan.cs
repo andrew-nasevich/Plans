@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Plans.DomainModel.Interfaces;
+using Plans.DomainModel.Users;
 
 namespace Plans.DomainModel.Plans
 {
     public class Plan
-        : IPlan
     {
         public int Id { get; set; }
 
-        public IUser User { get; set; }
+        public int UserId { get; set; }
+
+        public User User { get; set; }
 
         public string Name { get; set; }
 
-        public IPlanPeriod PlanPeriod { get; set; }
+        public ICollection<PlanPeriod> PlanPeriods { get; set; }
 
         public float Percentage { get; set; }
 
