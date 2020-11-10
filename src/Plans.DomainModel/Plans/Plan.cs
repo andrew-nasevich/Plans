@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Plans.DomainModel.Users;
 
 namespace Plans.DomainModel.Plans
@@ -9,16 +8,16 @@ namespace Plans.DomainModel.Plans
     {
         public int Id { get; set; }
 
+        public int UserId { get; set; }
+
         public User User { get; set; }
 
         public string Name { get; set; }
 
-        public ICollection<DaysInterval> DaysIntervals { get; set; }
+        public ICollection<PlanPeriod> PlanPeriods { get; set; }
 
         public float Percentage { get; set; }
 
-        public DateTime FinishingTime{ get; set; }
-
-
+        public DateTime CreatingDateTime { get; set; }
     }
-}
+} 
