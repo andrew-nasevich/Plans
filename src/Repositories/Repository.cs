@@ -12,11 +12,11 @@ namespace Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly PlansDbContext _dbContext;
+        private readonly DbContext _dbContext;
         private readonly DbSet<T> _entities;
 
 
-        public Repository(PlansDbContext dbContext) 
+        public Repository(DbContext dbContext) 
         {
             _dbContext = dbContext;
             _entities = dbContext.Set<T>();
