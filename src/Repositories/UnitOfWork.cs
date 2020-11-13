@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Plans.Repositories.Interfaces;
+using Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

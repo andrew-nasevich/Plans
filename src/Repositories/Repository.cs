@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Plans.Repositories.DbContexts;
-using Plans.Repositories.Interfaces;
+using Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +11,35 @@ namespace Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _dbContext;
+        private readonly DbContext _context;
         private readonly DbSet<T> _entities;
 
 
-        public Repository(DbContext dbContext) 
+        public Repository(DbContext context)
         {
-            _dbContext = dbContext;
-            _entities = dbContext.Set<T>();
+            _context = context;
+            _entities = _context.Set<T>();
         }
 
+
+        public async Task<IReadOnlyCollection<T>> GetAllAsync()
+        {
+            return await GetAllQuery().ToListAsync();
+        }
+
+        public virtual async Task<T> GetByIdAsync(object id)
+        {
+            return await _entities.FindAsync(id);
+        }
+
+        public async Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await GetAllQuery().Where(predicate).ToListAsync();
+        }
 
         public void Add(T entity)
         {
             _entities.Add(entity);
-        }
-
-        public async Task<IReadOnlyCollection<T>> GetAllAsync()
-        {
-            return await _entities.ToListAsync();
-        }
-
-        public async Task<T> GetByIdAsync(object id)
-        {
-            return await _entities.FindAsync(id);
         }
 
         public void Remove(T entity)
@@ -46,12 +50,18 @@ namespace Repositories
 
         public void Update(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task<IReadOnlyCollection<T>> WhereAsync(Expression<Func<T, bool>> predecate)
+
+        protected virtual IQueryable<T> GetAllQuery()
         {
-            return await _entities.Where(predecate).ToListAsync();
+            return _entities;
+        }
+
+        protected IQueryable<T> GetQuery(params Expression<Func<T, object>>[] includes)
+        {
+            return includes.Aggregate<Expression<Func<T, object>>, IQueryable<T>>(_entities, (current, include) => current.Include(include));
         }
     }
 }
